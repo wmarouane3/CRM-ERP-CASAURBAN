@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --ground: #f5f6f9;
+  --surface: #ffffff;
+  --border: #e4e7ec;
+}
+
+* { -webkit-tap-highlight-color: transparent; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: #101828;
+  font-family: 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { text-wrap: balance; letter-spacing: -0.01em; }
+
+.num { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+/* scrollbars ------------------------------------------------------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d5d9e2; border-radius: 8px; border: 3px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-thumb:hover { background: #b9c0cd; background-clip: content-box; }
+
+/* focus ------------------------------------------------------------ */
+:focus-visible { outline: 2px solid #5b55d9; outline-offset: 2px; border-radius: 6px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+@layer components {
+  .card { @apply bg-white border border-[#e4e7ec] rounded-xl shadow-card; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 h-9 text-[13px] font-medium transition-colors select-none; }
+  .btn-primary { @apply btn bg-brand-600 text-white hover:bg-brand-700 disabled:opacity-50; }
+  .btn-ghost { @apply btn bg-white border border-[#e4e7ec] text-ink-700 hover:bg-ground; }
+  .btn-soft { @apply btn bg-brand-50 text-brand-700 hover:bg-brand-100; }
+  .btn-danger { @apply btn bg-rose-600 text-white hover:bg-rose-700; }
+  .input {
+    @apply w-full h-9 rounded-lg border border-[#e4e7ec] bg-white px-3 text-[13px]
+           placeholder:text-ink-300 focus:border-brand-400 focus:ring-2 focus:ring-brand-100 outline-none transition;
+  }
+  .label { @apply block text-[12px] font-medium text-ink-500 mb-1.5; }
+  .th { @apply text-right text-[11px] font-semibold uppercase tracking-wide text-ink-400 px-3 py-2.5 whitespace-nowrap; }
+  .td { @apply px-3 py-2.5 text-[13px] text-ink-700 align-middle whitespace-nowrap; }
+  .tr { @apply border-t border-[#eef0f4] hover:bg-[#fafbfc] transition-colors; }
+  .pill { @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[11.5px] font-medium ring-1 ring-inset; }
+  .scroll-x { @apply overflow-x-auto; }
+}
+
+/* animations -------------------------------------------------------- */
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.rise { animation: rise .28s cubic-bezier(.22,.8,.3,1) both; }
+@keyframes fadein { from { opacity: 0 } to { opacity: 1 } }
+.fadein { animation: fadein .2s ease both; }
+
+.recharts-cartesian-axis-tick text { font-size: 11px; fill: #98a2b3; font-family: 'IBM Plex Mono', monospace; }
+.recharts-default-tooltip { border-radius: 10px !important; border: 1px solid #e4e7ec !important; box-shadow: 0 12px 32px -8px rgba(16,24,40,.18); font-size: 12px; }
